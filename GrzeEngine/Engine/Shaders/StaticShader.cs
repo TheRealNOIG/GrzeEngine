@@ -1,16 +1,19 @@
-﻿using OpenGL;
+﻿using GrzeEngine.Engine.Utils;
+using OpenGL;
 
 namespace GrzeEngine.Engine.Shaders
 {
     class StaticShader : ShaderProgram
     {
-        private static readonly string VERTEX_FILE = "Vertex";
-        private static readonly string FRAGMENT_FILE = "Fragment";
+        private static readonly string VERTEX_FILE = "GrzeEngine.Engine.Shaders.staticVertexShader.txt";
+        private static readonly string FRAGMENT_FILE = "GrzeEngine.Engine.Shaders.staticFragmentShader.txt";
 
+        
         public StaticShader()
-            : base(System.IO.File.ReadAllText(@"D:\" + VERTEX_FILE + ".txt"),
-                  System.IO.File.ReadAllText(@"D:\" + FRAGMENT_FILE + ".txt"))
-        { }
+            : base(ResourceManager.getSourceFile(VERTEX_FILE),
+                ResourceManager.getSourceFile(FRAGMENT_FILE))
+        {
+        }
 
         public void LoadViewMatrix(Matrix4 viewMatrix)
         {
@@ -24,6 +27,7 @@ namespace GrzeEngine.Engine.Shaders
 
         public void LoadProjectionMatrix(int width, int height)
         {
+            //TODO get fov from active camera
             this["projection_matrix"].SetValue(Matrix4.CreatePerspectiveFieldOfView(0.75f, (float)width / height, 0.1f, 1000.0f));
         }
     }

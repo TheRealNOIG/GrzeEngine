@@ -39,3 +39,5 @@
 /home/tyler/RiderProjects/GrzeEngine/GrzeEngine/obj/Debug/GrzeEngine.exe.config
 /home/tyler/RiderProjects/GrzeEngine/GrzeEngine/obj/Debug/GrzeEngine.exe
 /home/tyler/RiderProjects/GrzeEngine/GrzeEngine/obj/Debug/GrzeEngine.pdb
+/home/tyler/RiderProjects/GrzeEngine/GrzeEngine/bin/Debug/Engine/Shaders/staticFragmentShader.txt
+/home/tyler/RiderProjects/GrzeEngine/GrzeEngine/bin/Debug/Engine/Shaders/staticVertexShader.txt
