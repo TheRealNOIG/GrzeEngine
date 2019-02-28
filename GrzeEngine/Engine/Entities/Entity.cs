@@ -2,7 +2,7 @@
 
 namespace GrzeEngine.Engine.Entities
 {
-    public class Entity
+    public abstract class Entity
     {
         public Vector3 position;
         public VAO model;
@@ -26,11 +26,32 @@ namespace GrzeEngine.Engine.Entities
             this.rotZ = rotation.Z;
         }
 
+        public abstract void Update(float delta);
+
         public void CleanUp()
         {
             model.Dispose();
         }
 
-        //TODO IncreasePosition(vec) IncreaseRotation(vec)
+        public void IncreasePosition(float x, float y, float z)
+        {
+            this.position.x += x;
+            this.position.y += y;
+            this.position.z += z;
+        }
+
+        public void IncreasePosition(int x, int y, int z)
+        {
+            this.position.x += x;
+            this.position.y += y;
+            this.position.z += z;
+        }
+
+        public void IncreaseRotation(float x, float y, float z)
+        {
+            this.rotX += x;
+            this.rotY += y;
+            this.rotZ += z;
+        }
     }
 }

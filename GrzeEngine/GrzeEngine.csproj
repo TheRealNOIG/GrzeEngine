@@ -124,6 +124,7 @@
     <Compile Include="Engine\Core\Window.cs" />
     <Compile Include="Engine\Entities\Camera.cs" />
     <Compile Include="Engine\Entities\Entity.cs" />
+    <Compile Include="Engine\Entities\TestBox.cs" />
     <Compile Include="Engine\Logging\ConsoleLogger.cs" />
     <Compile Include="Engine\Logging\Logger.cs" />
     <Compile Include="Engine\Logging\Log.cs" />

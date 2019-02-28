@@ -17,28 +17,28 @@ namespace GrzeEngine.Engine.Entities
 
         public void Update()
         {
-            var dx = (float) (speed * Math.Sin(Maths.toRadinas(yaw)));
-            var dz = (float) (speed * Math.Cos(Maths.toRadinas(yaw)));
-            var rdx = (float) (speed * Math.Sin(Maths.toRadinas(yaw + 90)));
-            var rdz = (float) (speed * Math.Cos(Maths.toRadinas(yaw + 90)));
+            var dx = (float) (speed * Math.Cos(Maths.toRadinas(yaw)));
+            var dz = (float) (speed * Math.Sin(Maths.toRadinas(yaw)));
+            var rdx = (float) (speed * Math.Cos(Maths.toRadinas(yaw + 90)));
+            var rdz = (float) (speed * Math.Sin(Maths.toRadinas(yaw + 90)));
             
             if (KeyboardManager.IsKeyDown('w'))
-                IncreasePosition(dx, dz);
-            if (KeyboardManager.IsKeyDown('s'))
-                IncreasePosition(-dx, -dz);;
-            if (KeyboardManager.IsKeyDown('a'))
                 IncreasePosition(rdx, rdz);
-            if (KeyboardManager.IsKeyDown('d'))
+            if (KeyboardManager.IsKeyDown('s'))
                 IncreasePosition(-rdx, -rdz);;
+            if (KeyboardManager.IsKeyDown('a'))
+                IncreasePosition(dx, dz);
+            if (KeyboardManager.IsKeyDown('d'))
+                IncreasePosition(-dx, -dz);;
             if (KeyboardManager.IsKeyDown(' '))
                 position.Y -= speed;
             if (KeyboardManager.IsKeyDown('t'))
                 position.Y += speed;
 
             if (KeyboardManager.IsKeyDown('q'))
-                yaw += 1f;
-            if (KeyboardManager.IsKeyDown('e'))
                 yaw -= 1f;
+            if (KeyboardManager.IsKeyDown('e'))
+                yaw += 1f;
         }
 
         public void IncreasePosition(float x, float z, float y)

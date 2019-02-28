@@ -17,7 +17,7 @@ namespace GrzeEngine.Engine.Render
             this.camera = camera;
             this.shader = new StaticShader();
             shader.LoadProjectionMatrix(width, height); 
-            shader.LoadViewMatrix(Matrix4.CreateTranslation(new Vector3(2, 2, -10)) * Matrix4.CreateRotation(new Vector3(1, -2, 0), 0.2f));
+            shader.LoadViewMatrix(Maths.CreateViewMatrix(this.camera));;
         }
 
         public void AddEntity(Entity entity)
@@ -31,20 +31,23 @@ namespace GrzeEngine.Engine.Render
             
             foreach (Entity entity in entities)
             {
-                //TODO remove entity test
-                entity.rotX += 0.001f;
-                entity.rotY += 0.002f;
-                entity.rotZ += 0.001f;
-
                 SetEntityTransform(entity);
                 entity.model.Program.Use();
                 entity.model.Draw();
             }
         }
 
+        public void Update(float delta)
+        {
+            foreach (Entity entity in entities)
+            {
+                entity.Update(delta);
+            }
+        }
+
         public void SetEntityTransform(Entity entity)
         {
-            shader["transformation_matrix"].SetValue(Maths.CreateTransformationMatrix(entity));
+            shader.LoadTransformationMatrix(Maths.CreateTransformationMatrix(entity));
         }
 
         public void Cleanup()

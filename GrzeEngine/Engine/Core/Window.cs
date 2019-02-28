@@ -41,8 +41,15 @@ namespace GrzeEngine.Engine.Core
             entityRenderer = new EntityRenderer(WIDTH, HEIGHT, camera);
 
             //Create a cube
-            entityRenderer.AddEntity(new Entity(
+            Random rnd = new Random();
+            entityRenderer.AddEntity(new TestBox(
                 Geometry.CreateCube(entityRenderer.shader, new Vector3(-1, -1, -1), new Vector3(1, 1, 1)), Vector3.Zero, Vector3.Zero));
+            for (int i = 0; i < 1000; i++)
+            {
+                entityRenderer.AddEntity(new TestBox(
+                    Geometry.CreateCube(entityRenderer.shader, new Vector3(-1, -1, -1), new Vector3(1, 1, 1)), new Vector3(-rnd.Next(100), -rnd.Next(100), -rnd.Next(100)), Vector3.Zero));
+            }
+            
         }
 
         void CleanUp()
@@ -52,7 +59,9 @@ namespace GrzeEngine.Engine.Core
 
         void OnUpdate()
         {
+            //TODO implement delta between frames
             camera.Update();
+            entityRenderer.Update(0);
         }
 
         void HandleInput(char c, bool state)

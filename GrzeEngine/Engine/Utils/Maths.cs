@@ -17,8 +17,8 @@ namespace GrzeEngine.Engine.Utils
             var rotationX = Matrix4.CreateRotationX(toRadinas(camera.pitch));
             var rotationY = Matrix4.CreateRotationY(toRadinas(camera.yaw));
             var rotationZ = Matrix4.CreateRotationZ(toRadinas(camera.roll));
-            var finalRotation = rotationX * rotationY * rotationZ;
-            return Matrix4.CreateTranslation(finalRotation * camera.position);
+            Matrix4 translation =  Matrix4.CreateTranslation(camera.position);
+            return (translation * rotationX * rotationY * rotationZ);
         }
 
         public static Matrix4 CreateTransformationMatrix(Entity entity)
