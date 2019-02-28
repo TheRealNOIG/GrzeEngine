@@ -28,7 +28,7 @@ namespace GrzeEngine.Engine.Shaders
         public void LoadProjectionMatrix(int width, int height)
         {
             //TODO get fov from active camera
-            this["projection_matrix"].SetValue(Matrix4.CreatePerspectiveFieldOfView(0.75f, (float)width / height, 0.1f, 1000.0f));
+            this["projection_matrix"].SetValue(Matrix4.CreatePerspectiveFieldOfView(1f, (float)width / height, 0.1f, 1000.0f));
         }
     }
 }

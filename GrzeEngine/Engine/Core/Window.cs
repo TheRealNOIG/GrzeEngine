@@ -1,4 +1,5 @@
-﻿using GrzeEngine.Engine.Entities;
+﻿using System;
+using GrzeEngine.Engine.Entities;
 using GrzeEngine.Engine.Logging;
 using GrzeEngine.Engine.Render;
 using GrzeEngine.Engine.Utils;
@@ -6,7 +7,7 @@ using OpenGL;
 
 namespace GrzeEngine.Engine.Core
 {
-    class Window
+    internal class Window
     {
         public static int WIDTH = 1280, HEIGHT = 720;
 
@@ -23,7 +24,7 @@ namespace GrzeEngine.Engine.Core
             while (OpenGL.Platform.Window.Open)
             {
                 OpenGL.Platform.Window.HandleEvents();
-                OpenGL.Platform.Input.Subscribe((char)27, OpenGL.Platform.Window.OnClose);
+                OpenGL.Platform.Input.Subscribe((char)27, OnExit);
                 OpenGL.Platform.Input.SubscribeAll(new OpenGL.Platform.Event(HandleInput));
 
                 OnUpdate();
@@ -40,7 +41,6 @@ namespace GrzeEngine.Engine.Core
             entityRenderer = new EntityRenderer(WIDTH, HEIGHT, camera);
 
             //Create a cube
-            //entityRenderer.AddEntity((Geometry.CreateCube(entityRenderer.shader, new Vector3(-1, -1, -1), new Vector3(1, 1, 1));
             entityRenderer.AddEntity(new Entity(
                 Geometry.CreateCube(entityRenderer.shader, new Vector3(-1, -1, -1), new Vector3(1, 1, 1)), Vector3.Zero, Vector3.Zero));
         }
@@ -57,7 +57,7 @@ namespace GrzeEngine.Engine.Core
 
         void HandleInput(char c, bool state)
         {
-            MasterLogger.Message(c.ToString() + " " + state.ToString());
+            Log.Message(c.ToString() + " " + state.ToString());
             KeyboardManager.HandleInput(c, state);
         }
 
@@ -72,6 +72,13 @@ namespace GrzeEngine.Engine.Core
             entityRenderer.Render();
 
             OpenGL.Platform.Window.SwapBuffers();
+        }
+
+        void OnExit()
+        {
+            //TODO need to close the console when the window exit button is pressed
+            OpenGL.Platform.Window.OnClose();
+            Environment.Exit(0);
         }
     }
 }

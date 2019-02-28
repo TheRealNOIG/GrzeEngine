@@ -8,8 +8,8 @@ namespace GrzeEngine
     {
         static void Main(string[] args)
         {
-            MasterLogger.CreateLoggers();
-            MasterLogger.Message("Creating OpenGL instance", LogLevel.INFO);
+            Log.CreateLoggers();
+            Log.Message("Creating OpenGL instance", LogLevel.INFO);
             Window window = new Window();
             Console.ReadKey();
         }

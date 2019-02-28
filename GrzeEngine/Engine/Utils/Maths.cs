@@ -1,4 +1,5 @@
-﻿using GrzeEngine.Engine.Entities;
+﻿using System;
+using GrzeEngine.Engine.Entities;
 using OpenGL;
 
 namespace GrzeEngine.Engine.Utils
@@ -6,11 +7,16 @@ namespace GrzeEngine.Engine.Utils
     public static class Maths
     {
 
+        public static float toRadinas(float angle)
+        {
+            return ((float)Math.PI / 180) * angle;
+        }
+
         public static Matrix4 CreateViewMatrix(Camera camera)
         {
-            var rotationX = Matrix4.CreateRotationX(camera.pitch);
-            var rotationY = Matrix4.CreateRotationY(camera.yaw);
-            var rotationZ = Matrix4.CreateRotationZ(camera.roll);
+            var rotationX = Matrix4.CreateRotationX(toRadinas(camera.pitch));
+            var rotationY = Matrix4.CreateRotationY(toRadinas(camera.yaw));
+            var rotationZ = Matrix4.CreateRotationZ(toRadinas(camera.roll));
             var finalRotation = rotationX * rotationY * rotationZ;
             return Matrix4.CreateTranslation(finalRotation * camera.position);
         }

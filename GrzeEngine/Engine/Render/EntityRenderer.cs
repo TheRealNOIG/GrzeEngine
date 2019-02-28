@@ -28,6 +28,7 @@ namespace GrzeEngine.Engine.Render
         public void Render()
         {
             shader.LoadViewMatrix(Maths.CreateViewMatrix(this.camera));
+            
             foreach (Entity entity in entities)
             {
                 //TODO remove entity test

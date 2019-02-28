@@ -1,4 +1,6 @@
-﻿using GrzeEngine.Engine.Utils;
+﻿using System;
+using GrzeEngine.Engine.Logging;
+using GrzeEngine.Engine.Utils;
 using OpenGL;
 
 namespace GrzeEngine.Engine.Entities
@@ -7,6 +9,7 @@ namespace GrzeEngine.Engine.Entities
     {
         public  Vector3 position = Vector3.Zero;
         public float pitch, yaw, roll;
+        float speed = 0.05f;
 
         public Camera() {
             position = new Vector3(2, 2, -10);
@@ -14,24 +17,41 @@ namespace GrzeEngine.Engine.Entities
 
         public void Update()
         {
-            //TODO sin and cos this 
+            var dx = (float) (speed * Math.Sin(Maths.toRadinas(yaw)));
+            var dz = (float) (speed * Math.Cos(Maths.toRadinas(yaw)));
+            var rdx = (float) (speed * Math.Sin(Maths.toRadinas(yaw + 90)));
+            var rdz = (float) (speed * Math.Cos(Maths.toRadinas(yaw + 90)));
+            
             if (KeyboardManager.IsKeyDown('w'))
-                position.Z += 0.005f;
+                IncreasePosition(dx, dz);
             if (KeyboardManager.IsKeyDown('s'))
-                position.Z -= 0.005f;
+                IncreasePosition(-dx, -dz);;
             if (KeyboardManager.IsKeyDown('a'))
-                position.X += 0.005f;
+                IncreasePosition(rdx, rdz);
             if (KeyboardManager.IsKeyDown('d'))
-                position.X -= 0.005f;
+                IncreasePosition(-rdx, -rdz);;
             if (KeyboardManager.IsKeyDown(' '))
-                position.Y -= 0.005f;
+                position.Y -= speed;
             if (KeyboardManager.IsKeyDown('t'))
-                position.Y += 0.005f;
+                position.Y += speed;
 
             if (KeyboardManager.IsKeyDown('q'))
-                yaw += 0.001f;
+                yaw += 1f;
             if (KeyboardManager.IsKeyDown('e'))
-                yaw -= 0.001f;
+                yaw -= 1f;
+        }
+
+        public void IncreasePosition(float x, float z, float y)
+        {
+            this.position.x += x;
+            this.position.y += y;
+            this.position.z += z;
+        }
+
+        public void IncreasePosition(float x, float z)
+        {
+            this.position.x += x;
+            this.position.z += z;
         }
     }
 }

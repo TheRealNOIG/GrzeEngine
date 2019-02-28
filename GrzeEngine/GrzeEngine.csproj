@@ -126,7 +126,7 @@
     <Compile Include="Engine\Entities\Entity.cs" />
     <Compile Include="Engine\Logging\ConsoleLogger.cs" />
     <Compile Include="Engine\Logging\Logger.cs" />
-    <Compile Include="Engine\Logging\MasterLogger.cs" />
+    <Compile Include="Engine\Logging\Log.cs" />
     <Compile Include="Engine\Logging\NullLogger.cs" />
     <Compile Include="Engine\Render\EntityRenderer.cs" />
     <Compile Include="Engine\Render\MasterRenderer.cs" />
