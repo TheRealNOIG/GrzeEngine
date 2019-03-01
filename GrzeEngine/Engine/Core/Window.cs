@@ -13,18 +13,17 @@ namespace GrzeEngine.Engine.Core
 
         private EntityRenderer entityRenderer;
         private Camera camera;
+        private Clock clock;
 
         public Window()
         {
-
-            OpenGL.Platform.Window.CreateWindow("OpenGL", WIDTH, HEIGHT, false);
-
             Initialize();
 
             while (OpenGL.Platform.Window.Open)
             {
                 OpenGL.Platform.Window.HandleEvents();
                 OpenGL.Platform.Input.Subscribe((char)27, OnExit);
+                //TODO Add non normal keys
                 OpenGL.Platform.Input.SubscribeAll(new OpenGL.Platform.Event(HandleInput));
 
                 OnUpdate();
@@ -36,6 +35,13 @@ namespace GrzeEngine.Engine.Core
 
         void Initialize()
         {
+            //Setup opengl and window
+            OpenGL.Platform.Window.CreateWindow("OpenGL", WIDTH, HEIGHT, false);
+            Gl.Enable(EnableCap.DepthTest);
+            Gl.BlendFunc(BlendingFactorSrc.SrcAlpha, BlendingFactorDest.OneMinusSrcAlpha);
+
+            clock = new Clock();
+            
             //Setup renderer
             camera = new Camera();
             entityRenderer = new EntityRenderer(WIDTH, HEIGHT, camera);
@@ -44,12 +50,11 @@ namespace GrzeEngine.Engine.Core
             Random rnd = new Random();
             entityRenderer.AddEntity(new TestBox(
                 Geometry.CreateCube(entityRenderer.shader, new Vector3(-1, -1, -1), new Vector3(1, 1, 1)), Vector3.Zero, Vector3.Zero));
-            for (int i = 0; i < 1000; i++)
+            for (int i = 0; i < 10000; i++)
             {
                 entityRenderer.AddEntity(new TestBox(
-                    Geometry.CreateCube(entityRenderer.shader, new Vector3(-1, -1, -1), new Vector3(1, 1, 1)), new Vector3(-rnd.Next(100), -rnd.Next(100), -rnd.Next(100)), Vector3.Zero));
+                    Geometry.CreateCube(entityRenderer.shader, new Vector3(-1, -1, -1), new Vector3(1, 1, 1)), new Vector3(-rnd.Next(300), -rnd.Next(300), -rnd.Next(300)), Vector3.Zero));
             }
-            
         }
 
         void CleanUp()
@@ -59,14 +64,15 @@ namespace GrzeEngine.Engine.Core
 
         void OnUpdate()
         {
-            //TODO implement delta between frames
-            camera.Update();
-            entityRenderer.Update(0);
+            var delta = clock.delta();
+            
+            camera.Update(delta);
+            entityRenderer.Update(delta);
         }
 
         void HandleInput(char c, bool state)
         {
-            Log.Message(c.ToString() + " " + state.ToString());
+            //Log.Message(((int)c).ToString() + " " + state.ToString());
             KeyboardManager.HandleInput(c, state);
         }
 
@@ -75,7 +81,6 @@ namespace GrzeEngine.Engine.Core
             //SetupGL and Clear screen
             Gl.Viewport(0, 0, WIDTH, HEIGHT);
             Gl.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit);
-            Gl.Enable(EnableCap.DepthTest);
 
             //Rendercode
             entityRenderer.Render();

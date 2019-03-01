@@ -26,8 +26,6 @@
 /home/tyler/RiderProjects/GrzeEngine/GrzeEngine/bin/Debug/System.Security.Cryptography.X509Certificates.dll
 /home/tyler/RiderProjects/GrzeEngine/GrzeEngine/bin/Debug/System.Threading.Thread.dll
 /home/tyler/RiderProjects/GrzeEngine/GrzeEngine/bin/Debug/System.Xml.ReaderWriter.dll
-/home/tyler/RiderProjects/GrzeEngine/GrzeEngine/bin/Debug/OpenGL.pdb
-/home/tyler/RiderProjects/GrzeEngine/GrzeEngine/bin/Debug/OpenGL.Platform.pdb
 /home/tyler/RiderProjects/GrzeEngine/GrzeEngine/bin/Debug/System.Diagnostics.DiagnosticSource.xml
 /home/tyler/RiderProjects/GrzeEngine/GrzeEngine/bin/Debug/System.Numerics.Vectors.xml
 /home/tyler/RiderProjects/GrzeEngine/GrzeEngine/bin/Debug/System.Runtime.CompilerServices.Unsafe.xml
@@ -41,3 +39,7 @@
 /home/tyler/RiderProjects/GrzeEngine/GrzeEngine/obj/Debug/GrzeEngine.pdb
 /home/tyler/RiderProjects/GrzeEngine/GrzeEngine/bin/Debug/Engine/Shaders/staticFragmentShader.txt
 /home/tyler/RiderProjects/GrzeEngine/GrzeEngine/bin/Debug/Engine/Shaders/staticVertexShader.txt
+/home/tyler/RiderProjects/GrzeEngine/GrzeEngine/bin/Debug/fonts/font24.fnt
+/home/tyler/RiderProjects/GrzeEngine/GrzeEngine/bin/Debug/fonts/font24.png
+/home/tyler/RiderProjects/GrzeEngine/GrzeEngine/bin/Debug/OpenGL.pdb
+/home/tyler/RiderProjects/GrzeEngine/GrzeEngine/bin/Debug/OpenGL.Platform.pdb

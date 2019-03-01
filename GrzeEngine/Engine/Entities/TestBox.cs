@@ -14,9 +14,9 @@ namespace GrzeEngine.Engine.Entities
 
         public override void Update(float delta)
         {
-            rotX += 0.001f;
-            rotY += 0.002f;
-            rotZ += 0.001f;
+            rotX += 0.001f * delta;
+            rotY += 0.002f * delta;
+            rotZ += 0.001f * delta;
         }
     }
 }

@@ -15,12 +15,13 @@ namespace GrzeEngine.Engine.Entities
             position = new Vector3(2, 2, -10);
         }
 
-        public void Update()
+        public void Update(float delta)
         {
-            var dx = (float) (speed * Math.Cos(Maths.toRadinas(yaw)));
-            var dz = (float) (speed * Math.Sin(Maths.toRadinas(yaw)));
-            var rdx = (float) (speed * Math.Cos(Maths.toRadinas(yaw + 90)));
-            var rdz = (float) (speed * Math.Sin(Maths.toRadinas(yaw + 90)));
+            float deltaSpeed = speed * delta;
+            var dx = (float) (deltaSpeed * Math.Cos(Maths.toRadinas(yaw)));
+            var dz = (float) (deltaSpeed * Math.Sin(Maths.toRadinas(yaw)));
+            var rdx = (float) (deltaSpeed * Math.Cos(Maths.toRadinas(yaw + 90)));
+            var rdz = (float) (deltaSpeed * Math.Sin(Maths.toRadinas(yaw + 90)));
             
             if (KeyboardManager.IsKeyDown('w'))
                 IncreasePosition(rdx, rdz);
@@ -31,14 +32,14 @@ namespace GrzeEngine.Engine.Entities
             if (KeyboardManager.IsKeyDown('d'))
                 IncreasePosition(-dx, -dz);;
             if (KeyboardManager.IsKeyDown(' '))
-                position.Y -= speed;
+                position.Y -= deltaSpeed;
             if (KeyboardManager.IsKeyDown('t'))
-                position.Y += speed;
+                position.Y += deltaSpeed;
 
             if (KeyboardManager.IsKeyDown('q'))
-                yaw -= 1f;
+                yaw -= deltaSpeed;
             if (KeyboardManager.IsKeyDown('e'))
-                yaw += 1f;
+                yaw += deltaSpeed;
         }
 
         public void IncreasePosition(float x, float z, float y)

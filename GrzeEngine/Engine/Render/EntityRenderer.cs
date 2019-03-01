@@ -22,6 +22,7 @@ namespace GrzeEngine.Engine.Render
 
         public void AddEntity(Entity entity)
         {
+            //TODO Flyweight VAO of entities
             entities.Add(entity);
         }
 
