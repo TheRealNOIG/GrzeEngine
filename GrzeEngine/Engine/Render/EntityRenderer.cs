@@ -9,7 +9,6 @@ namespace GrzeEngine.Engine.Render
     class EntityRenderer
     {
         public StaticShader shader;
-        private List<Entity> entities = new List<Entity>();
         private Camera camera;
 
         public EntityRenderer(int width, int height, Camera camera)
@@ -20,30 +19,53 @@ namespace GrzeEngine.Engine.Render
             shader.LoadViewMatrix(Maths.CreateViewMatrix(this.camera));;
         }
 
-        public void AddEntity(Entity entity)
-        {
-            //TODO Flyweight VAO of entities
-            entities.Add(entity);
-        }
-
+        /*
         public void Render()
         {
             shader.LoadViewMatrix(Maths.CreateViewMatrix(this.camera));
+            Gl.Enable(EnableCap.CullFace);
+            Gl.CullFace(CullFaceMode.Back);
             
             foreach (Entity entity in entities)
             {
+                VAO model = entity.model;
                 SetEntityTransform(entity);
-                entity.model.Program.Use();
-                entity.model.Draw();
+                Gl.BindVertexArray(model.ID);
+                Gl.DrawElements(model.DrawMode, model.VertexCount, model.elementType, model.offsetInBytes);
+                Gl.BindVertexArray(0);
+                //entity.model.Program.Use();
+                //entity.model.Draw();
             }
         }
+        */
 
-        public void Update(float delta)
+        public void Render(Dictionary<VAO, List<Entity>> entities)
         {
-            foreach (Entity entity in entities)
+            shader.LoadViewMatrix(Maths.CreateViewMatrix(this.camera));
+            Gl.Enable(EnableCap.CullFace);
+            Gl.CullFace(CullFaceMode.Back);
+            
+            foreach (KeyValuePair<VAO, List<Entity>> item in entities)
             {
-                entity.Update(delta);
+                VAO model = item.Key;
+                PrepareModel(model);
+                foreach (Entity entity in item.Value)
+                {
+                    SetEntityTransform(entity);
+                    Gl.DrawElements(model.DrawMode, model.VertexCount, model.elementType, model.offsetInBytes);
+                }
+                UnBindModel();
             }
+        }
+        
+        public void PrepareModel(VAO model)
+        {
+            Gl.BindVertexArray(model.ID);
+        }
+
+        public void UnBindModel()
+        {
+            Gl.BindVertexArray(0);
         }
 
         public void SetEntityTransform(Entity entity)
@@ -54,10 +76,6 @@ namespace GrzeEngine.Engine.Render
         public void Cleanup()
         {
             shader.Dispose();
-            foreach (Entity entity in entities)
-            {
-                entity.CleanUp();
-            }
         }
     }
 }

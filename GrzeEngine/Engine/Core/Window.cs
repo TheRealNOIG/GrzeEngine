@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using GrzeEngine.Engine.Entities;
 using GrzeEngine.Engine.Logging;
 using GrzeEngine.Engine.Render;
@@ -11,7 +12,7 @@ namespace GrzeEngine.Engine.Core
     {
         public static int WIDTH = 1280, HEIGHT = 720;
 
-        private EntityRenderer entityRenderer;
+        private MasterRenderer masterRenderer;
         private Camera camera;
         private Clock clock;
 
@@ -44,22 +45,22 @@ namespace GrzeEngine.Engine.Core
             
             //Setup renderer
             camera = new Camera();
-            entityRenderer = new EntityRenderer(WIDTH, HEIGHT, camera);
+            masterRenderer = new MasterRenderer(WIDTH, HEIGHT, camera);
 
-            //Create a cube
+            //Create some cubes
             Random rnd = new Random();
-            entityRenderer.AddEntity(new TestBox(
-                Geometry.CreateCube(entityRenderer.shader, new Vector3(-1, -1, -1), new Vector3(1, 1, 1)), Vector3.Zero, Vector3.Zero));
+            VAO box = Geometry.CreateCube( masterRenderer.GetEntityShader(), new Vector3(-1, -1, -1), new Vector3(1, 1, 1));
+            
+            masterRenderer.AddEntity(new TestBox(box, Vector3.Zero, Vector3.Zero));
             for (int i = 0; i < 10000; i++)
             {
-                entityRenderer.AddEntity(new TestBox(
-                    Geometry.CreateCube(entityRenderer.shader, new Vector3(-1, -1, -1), new Vector3(1, 1, 1)), new Vector3(-rnd.Next(300), -rnd.Next(300), -rnd.Next(300)), Vector3.Zero));
+                masterRenderer.AddEntity(new TestBox(box, new Vector3(-rnd.Next(300), -rnd.Next(300), -rnd.Next(300)), Vector3.Zero));
             }
         }
 
         void CleanUp()
         {
-            entityRenderer.Cleanup();
+            masterRenderer.Cleanup();
         }
 
         void OnUpdate()
@@ -67,7 +68,7 @@ namespace GrzeEngine.Engine.Core
             var delta = clock.delta();
             
             camera.Update(delta);
-            entityRenderer.Update(delta);
+            masterRenderer.Update(delta);
         }
 
         void HandleInput(char c, bool state)
@@ -83,7 +84,8 @@ namespace GrzeEngine.Engine.Core
             Gl.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit);
 
             //Rendercode
-            entityRenderer.Render();
+            masterRenderer.ProcessEntities();
+            masterRenderer.Render();
 
             OpenGL.Platform.Window.SwapBuffers();
         }
