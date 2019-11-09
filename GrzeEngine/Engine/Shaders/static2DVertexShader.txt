@@ -1,0 +1,15 @@
+﻿#version 330
+
+uniform mat4 projection_matrix;
+uniform mat4 view_matrix;
+uniform mat4 transformation_matrix;
+ 
+out vec3 color;
+ 
+attribute vec2 in_position;
+ 
+void main(void)
+{
+  gl_Position = projection_matrix * view_matrix * transformation_matrix * vec4(in_position, 0, 1);
+  color = vec3(in_position.x / 10, in_position.y / 10, 0);
+}

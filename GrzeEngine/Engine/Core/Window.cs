@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using GrzeEngine.Engine._2DEntities;
 using GrzeEngine.Engine.Entities;
 using GrzeEngine.Engine.Logging;
 using GrzeEngine.Engine.Render;
@@ -13,7 +14,8 @@ namespace GrzeEngine.Engine.Core
         public static int WIDTH = 1280, HEIGHT = 720;
 
         private MasterRenderer masterRenderer;
-        private Camera camera;
+        //private Camera camera;
+        private Camera2D camera2D;
         private Clock clock;
 
         public Window()
@@ -44,18 +46,23 @@ namespace GrzeEngine.Engine.Core
             clock = new Clock();
             
             //Setup renderer
-            camera = new Camera();
-            masterRenderer = new MasterRenderer(WIDTH, HEIGHT, camera);
+            camera2D = new Camera2D();
+            masterRenderer = new MasterRenderer(WIDTH, HEIGHT, camera2D);
 
-            //Create some cubes
+            //2D TEST
+            masterRenderer.AddSprite(new Sprite(Vector2.Zero, new Vector2(10, 10), Vector2.Zero, masterRenderer.GetSpriteShader()));
+
+            /*OLD 3D code
             Random rnd = new Random();
             VAO box = Geometry.CreateCube( masterRenderer.GetEntityShader(), new Vector3(-1, -1, -1), new Vector3(1, 1, 1));
             
             masterRenderer.AddEntity(new TestBox(box, Vector3.Zero, Vector3.Zero));
-            for (int i = 0; i < 10000; i++)
+            for (int i = 0; i < 1000; i++)
             {
                 masterRenderer.AddEntity(new TestBox(box, new Vector3(-rnd.Next(300), -rnd.Next(300), -rnd.Next(300)), Vector3.Zero));
             }
+            */
+
         }
 
         void CleanUp()
@@ -67,7 +74,7 @@ namespace GrzeEngine.Engine.Core
         {
             var delta = clock.delta();
             
-            camera.Update(delta);
+            camera2D.Update(delta);
             masterRenderer.Update(delta);
         }
 
@@ -85,6 +92,7 @@ namespace GrzeEngine.Engine.Core
 
             //Rendercode
             masterRenderer.ProcessEntities();
+            masterRenderer.ProcessSprite();
             masterRenderer.Render();
 
             OpenGL.Platform.Window.SwapBuffers();

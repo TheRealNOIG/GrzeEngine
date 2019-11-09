@@ -8,8 +8,8 @@ namespace GrzeEngine.Engine.Entities
     public class Camera
     {
         public  Vector3 position = Vector3.Zero;
-        public float pitch, yaw, roll;
-        float speed = 0.05f;
+        public float pitch, yaw, roll, scale;
+        readonly float speed = 0.05f;
 
         public Camera() {
             position = new Vector3(2, 2, -10);

@@ -14,7 +14,7 @@ namespace GrzeEngine.Engine.Render
         public EntityRenderer(int width, int height, Camera camera)
         {
             this.camera = camera;
-            this.shader = new StaticShader();
+            shader = new StaticShader();
             shader.LoadProjectionMatrix(width, height); 
             shader.LoadViewMatrix(Maths.CreateViewMatrix(this.camera));;
         }
@@ -41,7 +41,9 @@ namespace GrzeEngine.Engine.Render
 
         public void Render(Dictionary<VAO, List<Entity>> entities)
         {
+            shader.Use();
             shader.LoadViewMatrix(Maths.CreateViewMatrix(this.camera));
+
             Gl.Enable(EnableCap.CullFace);
             Gl.CullFace(CullFaceMode.Back);
             

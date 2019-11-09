@@ -1,4 +1,5 @@
 ﻿using System;
+using GrzeEngine.Engine._2DEntities;
 using GrzeEngine.Engine.Entities;
 using OpenGL;
 
@@ -21,6 +22,13 @@ namespace GrzeEngine.Engine.Utils
             return (translation * rotationX * rotationY * rotationZ);
         }
 
+        public static Matrix4 Create2DViewMatrix(Camera2D camera)
+        {
+            //TODO Add 2D layers
+            Matrix4 translation = Matrix4.CreateTranslation(new Vector3(camera.position.X, camera.position.Y, -1));
+            return translation;
+        }
+
         public static Matrix4 CreateTransformationMatrix(Entity entity)
         {
             Matrix4 x = Matrix4.CreateRotationX(entity.rotX);
@@ -28,6 +36,14 @@ namespace GrzeEngine.Engine.Utils
             Matrix4 z = Matrix4.CreateRotationZ(entity.rotZ);
             Matrix4 translation = Matrix4.CreateTranslation(entity.position);
             return (x * y * z * translation);
+        }
+
+        public static Matrix4 CreateTransformationMatrix(Sprite sprite)
+        {
+            Matrix4 x = Matrix4.CreateRotationX(sprite.rotation.X);
+            Matrix4 y = Matrix4.CreateRotationY(sprite.rotation.Y);
+            Matrix4 translation = Matrix4.CreateTranslation(new Vector3(sprite.position.X, sprite.position.Y, 0));
+            return (x * y * translation);
         }
 
         //public static Matrix4 Transform(Vector3 position, float )

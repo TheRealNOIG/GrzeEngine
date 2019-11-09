@@ -121,6 +121,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Engine\2DEntities\Camera2D.cs" />
+    <Compile Include="Engine\2DEntities\Sprite.cs" />
     <Compile Include="Engine\Core\Window.cs" />
     <Compile Include="Engine\Entities\Camera.cs" />
     <Compile Include="Engine\Entities\Entity.cs" />
@@ -132,6 +134,9 @@
     <Compile Include="Engine\Render\EntityRenderer.cs" />
     <Compile Include="Engine\Render\MasterRenderer.cs" />
     <Compile Include="Engine\Render\Renderer.cs" />
+    <Compile Include="Engine\Render\SpriteRenderer.cs" />
+    <Compile Include="Engine\Render\SpriteVAO.cs" />
+    <Compile Include="Engine\Shaders\Static2DShader.cs" />
     <Compile Include="Engine\Shaders\StaticShader.cs" />
     <Compile Include="Engine\Utils\Clock.cs" />
     <Compile Include="Engine\Utils\KeyboardManager.cs" />
@@ -158,6 +163,12 @@
     <EmbeddedResource Include="Engine\Shaders\staticVertexShader.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
+    <EmbeddedResource Include="Engine\Shaders\static2DVertexShader.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Engine\Shaders\static2DFragmentShader.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
     <Content Include="fonts\font24.fnt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -169,7 +180,7 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="rsc" />
+    <Folder Include="rsc\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\Giawa.OpenGL.0.1.5\build\Giawa.OpenGL.targets" Condition="Exists('..\packages\Giawa.OpenGL.0.1.5\build\Giawa.OpenGL.targets')" />

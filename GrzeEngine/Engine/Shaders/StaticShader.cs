@@ -15,6 +15,12 @@ namespace GrzeEngine.Engine.Shaders
         {
         }
 
+        public StaticShader(string vertexFile, string fragmentFile)
+            : base(ResourceManager.getSourceFile(vertexFile),
+                ResourceManager.getSourceFile(fragmentFile))
+        {
+        }
+
         public void LoadViewMatrix(Matrix4 viewMatrix)
         {
             this["view_matrix"].SetValue(viewMatrix);
