@@ -18,7 +18,7 @@ namespace GrzeEngine.Engine._2DEntities
             this.position = position;
             this.size = size;
             this.rotation = rotation;
-            this.model = CreateQuad(shader, this.position, this.size);
+            this.model = SpriteVAO.CreateQuad(shader, this.position, this.size);
         }
 
         public void Update(float delta)
@@ -35,15 +35,6 @@ namespace GrzeEngine.Engine._2DEntities
         {
             this.position.X += x;
             this.position.Y += y;
-        }
-
-        private SpriteVAO CreateQuad(ShaderProgram program, Vector2 location, Vector2 size)
-        {
-            Vector2[] vertices = new Vector2[] { new Vector2(location.X, location.Y), new Vector2(location.X + size.X, location.Y),
-                new Vector2(location.X + size.X, location.Y + size.Y), new Vector2(location.X, location.Y + size.Y) };
-            uint[] indices = new uint[] { 0, 1, 2, 2, 3, 0 };
-
-            return new SpriteVAO(program, new VBO<Vector2>(vertices), new VBO<uint>(indices, BufferTarget.ElementArrayBuffer, BufferUsageHint.StaticRead));
         }
     }
 }
