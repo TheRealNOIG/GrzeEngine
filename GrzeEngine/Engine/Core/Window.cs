@@ -5,6 +5,7 @@ using GrzeEngine.Engine.Entities;
 using GrzeEngine.Engine.Logging;
 using GrzeEngine.Engine.Render;
 using GrzeEngine.Engine.Utils;
+using GrzeEngine.Properties;
 using OpenGL;
 
 namespace GrzeEngine.Engine.Core

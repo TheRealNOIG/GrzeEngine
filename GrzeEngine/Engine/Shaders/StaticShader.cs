@@ -1,23 +1,21 @@
 ﻿using GrzeEngine.Engine.Utils;
+using GrzeEngine.Properties;
 using OpenGL;
 
 namespace GrzeEngine.Engine.Shaders
 {
     class StaticShader : ShaderProgram
     {
-        private static readonly string VERTEX_FILE = "GrzeEngine.Engine.Shaders.staticVertexShader.txt";
-        private static readonly string FRAGMENT_FILE = "GrzeEngine.Engine.Shaders.staticFragmentShader.txt";
-
-        
+       
         public StaticShader()
-            : base(ResourceManager.getSourceFile(VERTEX_FILE),
-                ResourceManager.getSourceFile(FRAGMENT_FILE))
+            : base(Resources.staticVertexShader,
+                Resources.staticFragmentShader)
         {
         }
 
         public StaticShader(string vertexFile, string fragmentFile)
-            : base(ResourceManager.getSourceFile(vertexFile),
-                ResourceManager.getSourceFile(fragmentFile))
+            : base(vertexFile,
+                fragmentFile)
         {
         }
 

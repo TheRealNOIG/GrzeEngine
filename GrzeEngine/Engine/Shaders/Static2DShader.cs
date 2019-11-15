@@ -1,4 +1,5 @@
 ﻿using GrzeEngine.Engine.Utils;
+using GrzeEngine.Properties;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,12 +10,10 @@ namespace GrzeEngine.Engine.Shaders
 {
     class Static2DShader : StaticShader
     {
-        private static readonly string VERTEX_FILE = "GrzeEngine.Engine.Shaders.static2DVertexShader.txt";
-        private static readonly string FRAGMENT_FILE = "GrzeEngine.Engine.Shaders.static2DFragmentShader.txt";
-
+        //No idea why static2DFragmentShader is an empty string and the file was saved to static2DFragmentShader1
         public Static2DShader()
-            : base(VERTEX_FILE,
-                FRAGMENT_FILE)
+            : base(Resources.static2DVertexShader,
+                Resources.static2DFragmentShader1)
         {
         }
 
