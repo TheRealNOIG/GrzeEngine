@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace GrzeEngine.Engine.Shaders
 {
-    class Static2DShader : StaticShader
+    public class Static2DShader : StaticShader
     {
         //No idea why static2DFragmentShader is an empty string and the file was saved to static2DFragmentShader1
         public Static2DShader()

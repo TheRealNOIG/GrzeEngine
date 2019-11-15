@@ -6,7 +6,7 @@ using GrzeEngine.Engine.Utils;
 using OpenGL;
 namespace GrzeEngine.Engine.Render
 {
-    class SpriteRenderer
+    public class SpriteRenderer
     {
         public Static2DShader shader;
         private Camera2D camera;

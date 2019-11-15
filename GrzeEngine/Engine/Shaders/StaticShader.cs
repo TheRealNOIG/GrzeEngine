@@ -4,7 +4,7 @@ using OpenGL;
 
 namespace GrzeEngine.Engine.Shaders
 {
-    class StaticShader : ShaderProgram
+    public class StaticShader : ShaderProgram
     {
        
         public StaticShader()

@@ -6,7 +6,7 @@ using OpenGL;
 
 namespace GrzeEngine.Engine.Render
 {
-    class EntityRenderer
+    public class EntityRenderer
     {
         public StaticShader shader;
         private Camera camera;
