@@ -67,7 +67,7 @@ namespace GrzeEngine.Engine.Core
             OpenGL.Platform.Window.SwapBuffers();
         }
 
-        void OnExit()
+        public virtual void OnExit()
         {
             OpenGL.Platform.Window.OnClose();
         }
