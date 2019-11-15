@@ -9,7 +9,7 @@ using OpenGL;
 namespace GrzeEngine.Engine.Render
 {
     
-    class MasterRenderer
+    public class MasterRenderer
     {
         private EntityRenderer entityRenderer;
         private SpriteRenderer spriteRenderer;

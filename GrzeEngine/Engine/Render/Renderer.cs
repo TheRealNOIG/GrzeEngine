@@ -1,6 +1,6 @@
 ﻿namespace GrzeEngine.Engine.Render
 {
-    class Renderer
+    public class Renderer
     {
     }
 }

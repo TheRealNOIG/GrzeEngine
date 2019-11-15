@@ -5,23 +5,34 @@ using GrzeEngine.Engine.Entities;
 using GrzeEngine.Engine.Logging;
 using GrzeEngine.Engine.Render;
 using GrzeEngine.Engine.Utils;
+using GrzeEngine.Properties;
 using OpenGL;
 
 namespace GrzeEngine.Engine.Core
 {
-    internal class Window
+    public abstract class Window
     {
-        public static int WIDTH = 1280, HEIGHT = 720;
+        protected int width, height;
+        protected Clock clock;
 
-        private MasterRenderer masterRenderer;
-        //private Camera camera;
-        private Camera2D camera2D;
-        private Clock clock;
-
-        public Window()
+        public Window(int width, int height)
         {
-            Initialize();
+            this.width = width;
+            this.height = height;
+        }
 
+        public virtual void Initialize(int width, int height)
+        {
+            //Setup opengl and window
+            OpenGL.Platform.Window.CreateWindow("OpenGL", this.width, this.height, false);
+            Gl.Enable(EnableCap.DepthTest);
+            Gl.BlendFunc(BlendingFactorSrc.SrcAlpha, BlendingFactorDest.OneMinusSrcAlpha);
+
+            clock = new Clock();
+        }
+
+        public virtual void StartLoop()
+        {
             while (OpenGL.Platform.Window.Open)
             {
                 OpenGL.Platform.Window.HandleEvents();
@@ -30,79 +41,35 @@ namespace GrzeEngine.Engine.Core
                 OpenGL.Platform.Input.SubscribeAll(new OpenGL.Platform.Event(HandleInput));
 
                 OnUpdate();
-                OnRender(); 
+                OnRender();
             }
-
-            CleanUp();
         }
 
-        void Initialize()
-        {
-            //Setup opengl and window
-            OpenGL.Platform.Window.CreateWindow("OpenGL", WIDTH, HEIGHT, false);
-            Gl.Enable(EnableCap.DepthTest);
-            Gl.BlendFunc(BlendingFactorSrc.SrcAlpha, BlendingFactorDest.OneMinusSrcAlpha);
+        public abstract void CleanUp();
 
-            clock = new Clock();
-            
-            //Setup renderer
-            camera2D = new Camera2D();
-            masterRenderer = new MasterRenderer(WIDTH, HEIGHT, camera2D);
+        public abstract void OnUpdate();
 
-            //2D TEST
-            masterRenderer.AddSprite(new Sprite(Vector2.Zero, new Vector2(10, 10), Vector2.Zero, masterRenderer.GetSpriteShader()));
-
-            /*OLD 3D code
-            Random rnd = new Random();
-            VAO box = Geometry.CreateCube( masterRenderer.GetEntityShader(), new Vector3(-1, -1, -1), new Vector3(1, 1, 1));
-            
-            masterRenderer.AddEntity(new TestBox(box, Vector3.Zero, Vector3.Zero));
-            for (int i = 0; i < 1000; i++)
-            {
-                masterRenderer.AddEntity(new TestBox(box, new Vector3(-rnd.Next(300), -rnd.Next(300), -rnd.Next(300)), Vector3.Zero));
-            }
-            */
-
-        }
-
-        void CleanUp()
-        {
-            masterRenderer.Cleanup();
-        }
-
-        void OnUpdate()
-        {
-            var delta = clock.delta();
-            
-            camera2D.Update(delta);
-            masterRenderer.Update(delta);
-        }
-
-        void HandleInput(char c, bool state)
+        public virtual void HandleInput(char c, bool state)
         {
             //Log.Message(((int)c).ToString() + " " + state.ToString());
             KeyboardManager.HandleInput(c, state);
         }
 
-        void OnRender()
+        public virtual void OnRender()
         {
             //SetupGL and Clear screen
-            Gl.Viewport(0, 0, WIDTH, HEIGHT);
+            Gl.Viewport(0, 0, this.width, this.height);
             Gl.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit);
+        }
 
-            //Rendercode
-            masterRenderer.ProcessEntities();
-            masterRenderer.ProcessSprite();
-            masterRenderer.Render();
-
+        public virtual void SwapBuffers()
+        {
             OpenGL.Platform.Window.SwapBuffers();
         }
 
         void OnExit()
         {
-            //TODO need to close the console when the window exit button is pressed
             OpenGL.Platform.Window.OnClose();
-            Environment.Exit(0);
         }
     }
 }
