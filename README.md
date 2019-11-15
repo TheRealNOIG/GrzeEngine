@@ -25,7 +25,7 @@ class Window : GrzeEngine.Engine.Core.Window
         base.Initialize(width, height);
         //Init CameraType
         camera2D = new Camera2D();
-        //Setup renderers and provide View Matrix size 
+        //Setup renderers and provide projection matrix size 
         masterRenderer = new MasterRenderer(this.width, this.height, camera2D);
         //Create Test Sprite
         masterRenderer.AddSprite(new Sprite(Vector2.Zero, new Vector2(10, 10), Vector2.Zero, masterRenderer.GetSpriteShader()));
