@@ -69,6 +69,7 @@ namespace GrzeEngine.Engine.Core
 
         public virtual void OnExit()
         {
+            CleanUp();
             OpenGL.Platform.Window.OnClose();
         }
     }
