@@ -1,7 +1,7 @@
 # GrzeEngine
 
 ## How To Setup A New Project
-Firstly, download all dependence using Nuget through Giawa's OpenGL Repo `Install-Package Giawa.OpenGL`
+Firstly, download all dependence using Nuget through Giawa's OpenGL Repo `Install-Package Giawa.OpenGL.Platform`
 
 Than, replace the `OpenGL.dll` & `OpenGL.Platform.dll` with the DLL's in the `~/Lib` folder due to the Nuget ones being outdated. (Also due to fixes that have not been merged into Giawa Master branch)
 
