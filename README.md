@@ -7,7 +7,7 @@ Than, replace the `OpenGL.dll` & `OpenGL.Platform.dll` with the DLL's in the `~/
 
 Finally, move `SDL2.dll`, found in `~/Lib`, into your output build directory. (Alternatively, place the dll into the root project folder and set it to `Copy if newer` in your IDE)
 
-## Skeleton Window Class
+## Skeleton
 
 ```C#
 class Window : GrzeEngine.Engine.Core.Window
@@ -22,6 +22,7 @@ class Window : GrzeEngine.Engine.Core.Window
     public override void Initialize(int width, int height) {
         //Setup Window & OpenGL context
         base.Initialize(width, height);
+
         //Init Master renderer and pass in a new renderer
         masterRenderer = new MasterRenderer();
         masterRenderer.AddRenderer("Renderer", new Renderer(this.width, this.height, new Camera2D(), new Static2DShader()));
