@@ -1,11 +1,11 @@
-﻿using GrzeEngine.Engine.Render;
+﻿using GrzeEngine.Engine.Entities._3D;
+using GrzeEngine.Engine.Render;
 using OpenGL;
 
 namespace GrzeEngine.Engine.Entities._2D
 {
-    public class Sprite : Entity
+    public class Sprite : ModelEntity
     {
-        public SpriteVAO model;
 
         public Sprite(Vector2 position, Vector2 size, Vector2 rotation, ShaderProgram shader)
         {
@@ -18,11 +18,6 @@ namespace GrzeEngine.Engine.Entities._2D
         public override void Update(float delta)
         {
 
-        }
-
-        public void CleanUp()
-        {
-            model.Dispose();
         }
     }
 }

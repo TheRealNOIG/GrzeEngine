@@ -1,4 +1,5 @@
 ﻿using System;
+using GrzeEngine.Engine.Shaders;
 using GrzeEngine.Engine.Utils;
 using OpenGL;
 
@@ -52,6 +53,11 @@ namespace GrzeEngine.Engine.Entities
         {
             this.position.X += x;
             this.position.Z += z;
+        }
+
+        public override Matrix4 GetViewMatrix()
+        {
+            return Maths.CreateViewMatrix(this);
         }
     }
 }
