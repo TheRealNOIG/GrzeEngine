@@ -3,20 +3,19 @@ using OpenGL;
 
 namespace GrzeEngine.Engine.Entities._2D
 {
-    public class Sprite : IEntity
+    public class Sprite : Entity
     {
-        public Vector2 position, rotation, size;
         public SpriteVAO model;
 
         public Sprite(Vector2 position, Vector2 size, Vector2 rotation, ShaderProgram shader)
         {
-            this.position = position;
-            this.size = size;
-            this.rotation = rotation;
-            this.model = SpriteVAO.CreateQuad(shader, this.position, this.size);
+            this.position = new Vector3(position.X, position.Y, 0);
+            this.size = new Vector3(size.X, size.Y, 0);
+            this.rotation = new Vector3(rotation.X, rotation.Y, 0);
+            model = SpriteVAO.CreateQuad(shader, this.position, this.size);
         }
 
-        public void Update(float delta)
+        public override void Update(float delta)
         {
 
         }
@@ -24,12 +23,6 @@ namespace GrzeEngine.Engine.Entities._2D
         public void CleanUp()
         {
             model.Dispose();
-        }
-
-        public void IncreasePosition(int x, int y)
-        {
-            this.position.X += x;
-            this.position.Y += y;
         }
     }
 }

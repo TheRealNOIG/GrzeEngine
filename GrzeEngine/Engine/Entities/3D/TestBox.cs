@@ -2,7 +2,7 @@ using OpenGL;
 
 namespace GrzeEngine.Engine.Entities._3D
 {
-    public class TestBox : Entity
+    public class TestBox : ModelEntity
     {
         public TestBox(VAO model, Vector3 position, float rotX, float rotY, float rotZ) : base(model, position, rotX, rotY, rotZ)
         {
@@ -14,9 +14,9 @@ namespace GrzeEngine.Engine.Entities._3D
 
         public override void Update(float delta)
         {
-            rotX += 0.001f * delta;
-            rotY += 0.002f * delta;
-            rotZ += 0.001f * delta;
+            rotation.X += 0.001f * delta;
+            rotation.Y += 0.002f * delta;
+            rotation.Z += 0.001f * delta;
         }
     }
 }
