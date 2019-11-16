@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using GrzeEngine.Engine._2DEntities;
-using GrzeEngine.Engine.Entities;
-using GrzeEngine.Engine.Logging;
-using GrzeEngine.Engine.Render;
-using GrzeEngine.Engine.Utils;
-using GrzeEngine.Properties;
+﻿using GrzeEngine.Engine.Utils;
 using OpenGL;
 
 namespace GrzeEngine.Engine.Core

@@ -1,6 +1,6 @@
 using OpenGL;
 
-namespace GrzeEngine.Engine.Entities
+namespace GrzeEngine.Engine.Entities._3D
 {
     public class TestBox : Entity
     {

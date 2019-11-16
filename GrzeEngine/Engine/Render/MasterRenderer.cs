@@ -1,9 +1,8 @@
 ﻿using System.Collections.Generic;
-using GrzeEngine.Engine._2DEntities;
 using GrzeEngine.Engine.Entities;
-using GrzeEngine.Engine.Logging;
+using GrzeEngine.Engine.Entities._2D;
+using GrzeEngine.Engine.Entities._3D;
 using GrzeEngine.Engine.Shaders;
-using GrzeEngine.Engine.Utils;
 using OpenGL;
 
 namespace GrzeEngine.Engine.Render
@@ -14,11 +13,11 @@ namespace GrzeEngine.Engine.Render
         private EntityRenderer entityRenderer;
         private SpriteRenderer spriteRenderer;
         private List<Entity> entityList = new List<Entity>();
-        private List<Sprite> spriteList = new List<Sprite>();
+        private List<Entities._2D.Sprite> spriteList = new List<Entities._2D.Sprite>();
         private Dictionary<VAO, List<Entity>> entityDictionary = new Dictionary<VAO, List<Entity>>();
-        private Dictionary<SpriteVAO, List<Sprite>> spriteDictionary = new Dictionary<SpriteVAO, List<Sprite>>();
+        private Dictionary<SpriteVAO, List<Entities._2D.Sprite>> spriteDictionary = new Dictionary<SpriteVAO, List<Entities._2D.Sprite>>();
 
-        public MasterRenderer(int width, int height, Camera camera)
+        public MasterRenderer(int width, int height, Camera3D camera)
         {
             entityRenderer = new EntityRenderer(width, height, camera);
         }
@@ -33,7 +32,7 @@ namespace GrzeEngine.Engine.Render
             entityList.Add(entity);
         }
 
-        public void AddSprite(Sprite sprite)
+        public void AddSprite(Entities._2D.Sprite sprite)
         {
             spriteList.Add(sprite);
         }
@@ -48,7 +47,7 @@ namespace GrzeEngine.Engine.Render
 
         public void ProcessSprite()
         {
-            foreach (Sprite sprite in spriteList)
+            foreach (Entities._2D.Sprite sprite in spriteList)
             {
                 ProcessSprite(sprite);
             }
@@ -74,13 +73,13 @@ namespace GrzeEngine.Engine.Render
             }
         }
 
-        private void ProcessSprite(Sprite sprite)
+        private void ProcessSprite(Entities._2D.Sprite sprite)
         {
             SpriteVAO model = sprite.model;
 
             if (spriteDictionary.ContainsKey(model))
             {
-                List<Sprite> result;
+                List<Entities._2D.Sprite> result;
                 if (spriteDictionary.TryGetValue(model, out result))
                 {
                     result.Add(sprite);
@@ -88,7 +87,7 @@ namespace GrzeEngine.Engine.Render
             }
             else
             {
-                List<Sprite> newList = new List<Sprite>();
+                List<Entities._2D.Sprite> newList = new List<Entities._2D.Sprite>();
                 newList.Add(sprite);
                 spriteDictionary.Add(model, newList);
             }

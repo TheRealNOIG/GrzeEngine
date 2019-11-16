@@ -1,14 +1,9 @@
 ﻿using GrzeEngine.Engine.Render;
 using OpenGL;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace GrzeEngine.Engine._2DEntities
+namespace GrzeEngine.Engine.Entities._2D
 {
-    public class Sprite
+    public class Sprite : IEntity
     {
         public Vector2 position, rotation, size;
         public SpriteVAO model;

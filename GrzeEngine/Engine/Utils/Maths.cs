@@ -1,6 +1,7 @@
 ﻿using System;
-using GrzeEngine.Engine._2DEntities;
 using GrzeEngine.Engine.Entities;
+using GrzeEngine.Engine.Entities._2D;
+using GrzeEngine.Engine.Entities._3D;
 using OpenGL;
 
 namespace GrzeEngine.Engine.Utils
@@ -13,7 +14,7 @@ namespace GrzeEngine.Engine.Utils
             return ((float)Math.PI / 180) * angle;
         }
 
-        public static Matrix4 CreateViewMatrix(Camera camera)
+        public static Matrix4 CreateViewMatrix(Camera3D camera)
         {
             var rotationX = Matrix4.CreateRotationX(toRadinas(camera.pitch));
             var rotationY = Matrix4.CreateRotationY(toRadinas(camera.yaw));
@@ -38,7 +39,7 @@ namespace GrzeEngine.Engine.Utils
             return (x * y * z * translation);
         }
 
-        public static Matrix4 CreateTransformationMatrix(Sprite sprite)
+        public static Matrix4 CreateTransformationMatrix(Entities._2D.Sprite sprite)
         {
             Matrix4 x = Matrix4.CreateRotationX(sprite.rotation.X);
             Matrix4 y = Matrix4.CreateRotationY(sprite.rotation.Y);

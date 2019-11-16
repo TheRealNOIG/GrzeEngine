@@ -1,14 +1,9 @@
 ﻿using GrzeEngine.Engine.Utils;
 using OpenGL;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace GrzeEngine.Engine._2DEntities
+namespace GrzeEngine.Engine.Entities
 {
-    public class Camera2D
+    public class Camera2D : Camera
     {
         public Vector2 position = Vector2.Zero;
         public float roll, scale, speed = 0.05f;
@@ -18,7 +13,7 @@ namespace GrzeEngine.Engine._2DEntities
             this.position = Vector2.Zero;
         }
 
-        public void Update(float delta)
+        public override void Update(float delta)
         {
             float deltaSpeed = speed * delta;
 

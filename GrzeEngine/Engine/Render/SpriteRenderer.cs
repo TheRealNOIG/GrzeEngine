@@ -1,12 +1,12 @@
 ﻿using System.Collections.Generic;
-using GrzeEngine.Engine._2DEntities;
 using GrzeEngine.Engine.Entities;
 using GrzeEngine.Engine.Shaders;
 using GrzeEngine.Engine.Utils;
+using GrzeEngine.Engine.Entities._2D;
 using OpenGL;
 namespace GrzeEngine.Engine.Render
 {
-    public class SpriteRenderer
+    public class SpriteRenderer : Renderer<SpriteVAO, Sprite>
     {
         public Static2DShader shader;
         private Camera2D camera;
@@ -19,7 +19,7 @@ namespace GrzeEngine.Engine.Render
             shader.LoadViewMatrix(Maths.Create2DViewMatrix(this.camera)); ;
         }
 
-        public void Render(Dictionary<SpriteVAO, List<Sprite>> sprites)
+        public override void Render(Dictionary<SpriteVAO, List<Sprite>> sprites)
         {
             shader.Use();
             shader.LoadViewMatrix(Maths.Create2DViewMatrix(this.camera));
@@ -39,23 +39,12 @@ namespace GrzeEngine.Engine.Render
                 UnBindModel();
             }
         }
-
-        public void PrepareModel(SpriteVAO model)
-        {
-            Gl.BindVertexArray(model.ID);
-        }
-
-        public void UnBindModel()
-        {
-            Gl.BindVertexArray(0);
-        }
-
         public void SetSpriteTransform(Sprite sprite)
         {
             shader.LoadTransformationMatrix(Maths.CreateTransformationMatrix(sprite));
         }
 
-        public void Cleanup()
+        public override void Cleanup()
         {
             shader.Dispose();
         }

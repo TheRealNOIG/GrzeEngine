@@ -1,8 +1,8 @@
 ﻿using OpenGL;
 
-namespace GrzeEngine.Engine.Entities
+namespace GrzeEngine.Engine.Entities._3D
 {
-    public abstract class Entity
+    public abstract class Entity : IEntity
     {
         public Vector3 position;
         public VAO model;
@@ -35,16 +35,16 @@ namespace GrzeEngine.Engine.Entities
 
         public void IncreasePosition(float x, float y, float z)
         {
-            this.position.x += x;
-            this.position.y += y;
-            this.position.z += z;
+            this.position.X += x;
+            this.position.Y += y;
+            this.position.Z += z;
         }
 
         public void IncreasePosition(int x, int y, int z)
         {
-            this.position.x += x;
-            this.position.y += y;
-            this.position.z += z;
+            this.position.X += x;
+            this.position.Y += y;
+            this.position.Z += z;
         }
 
         public void IncreaseRotation(float x, float y, float z)
