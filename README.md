@@ -12,7 +12,6 @@ Finally, move `SDL2.dll`, found in `~/Lib`, into your output build directory. (A
 ```C#
 class Window : GrzeEngine.Engine.Core.Window
 {
-    private Camera2D camera2D;
     private MasterRenderer masterRenderer;
 
     public Window(int width, int height) : base(width, height) {
@@ -23,30 +22,29 @@ class Window : GrzeEngine.Engine.Core.Window
     public override void Initialize(int width, int height) {
         //Setup Window & OpenGL context
         base.Initialize(width, height);
-        //Init CameraType
-        camera2D = new Camera2D();
-        //Setup renderers and provide projection matrix size 
-        masterRenderer = new MasterRenderer(this.width, this.height, camera2D);
+
+        //Init Master renderer and pass in a new renderer
+        masterRenderer = new MasterRenderer();
+        masterRenderer.AddRenderer("Renderer", new Renderer(this.width, this.height, new Camera2D(), new Static2DShader()));
         //Create Test Sprite
-        masterRenderer.AddSprite(new Sprite(Vector2.Zero, new Vector2(10, 10), Vector2.Zero, masterRenderer.GetSpriteShader()));
+        masterRenderer.AddEntity("Renderer", new Sprite(Vector2.Zero, new Vector2(10, 10), Vector2.Zero, masterRenderer.GetShader("Renderer")));
     }
     public override void OnRender() {
         base.OnRender();
-        //Proccess all sprites before renderering
-        masterRenderer.ProcessSprite();
-        //Render to screen
+        //Proccess all entities before renderering
+        masterRenderer.ProcessEntities();
+        //Render to buffer
         masterRenderer.Render();
         //Swap rendered buffer with current screen buffer
         SwapBuffers();
     }
     public override void OnUpdate() {
         float delta = clock.delta();
-        //Update the Camera and the renderer
-        camera2D.Update(delta);
+        //Update all Renderers and entities
         masterRenderer.Update(delta);
     }
     public override void CleanUp() {
-        //Inform the MasterRenderer to clean up
+        //Inform all Renderers to cleanup
         masterRenderer.Cleanup();
     }
     public override void OnExit() {

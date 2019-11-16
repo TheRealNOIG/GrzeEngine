@@ -125,12 +125,14 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Engine\2DEntities\Camera2D.cs" />
-    <Compile Include="Engine\2DEntities\Sprite.cs" />
-    <Compile Include="Engine\Core\Window.cs" />
     <Compile Include="Engine\Entities\Camera.cs" />
+    <Compile Include="Engine\Entities\Camera2D.cs" />
+    <Compile Include="Engine\Entities\2D\Sprite.cs" />
+    <Compile Include="Engine\Core\Window.cs" />
+    <Compile Include="Engine\Entities\Camera3D.cs" />
+    <Compile Include="Engine\Entities\ModelEntity.cs" />
+    <Compile Include="Engine\Entities\3D\TestBox.cs" />
     <Compile Include="Engine\Entities\Entity.cs" />
-    <Compile Include="Engine\Entities\TestBox.cs" />
     <Compile Include="Engine\Logging\ConsoleLogger.cs" />
     <Compile Include="Engine\Logging\Logger.cs" />
     <Compile Include="Engine\Logging\Log.cs" />

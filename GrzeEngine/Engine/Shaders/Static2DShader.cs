@@ -1,10 +1,4 @@
-﻿using GrzeEngine.Engine.Utils;
-using GrzeEngine.Properties;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using GrzeEngine.Properties;
 
 namespace GrzeEngine.Engine.Shaders
 {
@@ -17,7 +11,7 @@ namespace GrzeEngine.Engine.Shaders
         {
         }
 
-        public void Load2DProjectionMatrix(int width, int height)
+        public override void LoadProjectionMatrix(int width, int height)
         {
             //TODO get fov from active camera
             this["projection_matrix"].SetValue(OpenGL.Matrix4.CreateOrthographic(256, 144, 0.1f, 1000.0f));

@@ -18,7 +18,7 @@ namespace GrzeEngine.Engine.Render
             Init(vbos.ToArray());
         }
 
-        public static SpriteVAO CreateQuad(ShaderProgram program, Vector2 location, Vector2 size)
+        public static SpriteVAO CreateQuad(ShaderProgram program, Vector3 location, Vector3 size)
         {
             Vector2[] vertices = new Vector2[] { new Vector2(location.X, location.Y), new Vector2(location.X + size.X, location.Y),
                 new Vector2(location.X + size.X, location.Y + size.Y), new Vector2(location.X, location.Y + size.Y) };

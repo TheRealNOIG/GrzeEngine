@@ -1,6 +1,7 @@
 ﻿using System;
-using GrzeEngine.Engine._2DEntities;
 using GrzeEngine.Engine.Entities;
+using GrzeEngine.Engine.Entities._2D;
+using GrzeEngine.Engine.Entities._3D;
 using OpenGL;
 
 namespace GrzeEngine.Engine.Utils
@@ -13,7 +14,7 @@ namespace GrzeEngine.Engine.Utils
             return ((float)Math.PI / 180) * angle;
         }
 
-        public static Matrix4 CreateViewMatrix(Camera camera)
+        public static Matrix4 CreateViewMatrix(Camera3D camera)
         {
             var rotationX = Matrix4.CreateRotationX(toRadinas(camera.pitch));
             var rotationY = Matrix4.CreateRotationY(toRadinas(camera.yaw));
@@ -31,19 +32,11 @@ namespace GrzeEngine.Engine.Utils
 
         public static Matrix4 CreateTransformationMatrix(Entity entity)
         {
-            Matrix4 x = Matrix4.CreateRotationX(entity.rotX);
-            Matrix4 y = Matrix4.CreateRotationY(entity.rotY);
-            Matrix4 z = Matrix4.CreateRotationZ(entity.rotZ);
+            Matrix4 x = Matrix4.CreateRotationX(entity.rotation.X);
+            Matrix4 y = Matrix4.CreateRotationY(entity.rotation.Y);
+            Matrix4 z = Matrix4.CreateRotationZ(entity.rotation.Z);
             Matrix4 translation = Matrix4.CreateTranslation(entity.position);
             return (x * y * z * translation);
-        }
-
-        public static Matrix4 CreateTransformationMatrix(Sprite sprite)
-        {
-            Matrix4 x = Matrix4.CreateRotationX(sprite.rotation.X);
-            Matrix4 y = Matrix4.CreateRotationY(sprite.rotation.Y);
-            Matrix4 translation = Matrix4.CreateTranslation(new Vector3(sprite.position.X, sprite.position.Y, 0));
-            return (x * y * translation);
         }
 
         //public static Matrix4 Transform(Vector3 position, float )
