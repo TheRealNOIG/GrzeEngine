@@ -137,10 +137,8 @@
     <Compile Include="Engine\Logging\Logger.cs" />
     <Compile Include="Engine\Logging\Log.cs" />
     <Compile Include="Engine\Logging\NullLogger.cs" />
-    <Compile Include="Engine\Render\EntityRenderer.cs" />
     <Compile Include="Engine\Render\MasterRenderer.cs" />
     <Compile Include="Engine\Render\Renderer.cs" />
-    <Compile Include="Engine\Render\SpriteRenderer.cs" />
     <Compile Include="Engine\Render\VAOs\SpriteVAO.cs" />
     <Compile Include="Engine\Shaders\Static2DShader.cs" />
     <Compile Include="Engine\Shaders\StaticShader.cs" />
