@@ -7,7 +7,6 @@ namespace GrzeEngine.Engine.Utils
 {
     public static class ResourceManager
     {
-
         public static VAO LoadOBJModel(string obj, ShaderProgram shader)
         {
             string[] lines = Regex.Split(obj, "\r\n|\r|\n");

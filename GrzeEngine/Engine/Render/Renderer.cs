@@ -91,7 +91,10 @@ namespace GrzeEngine.Engine.Render
                 List<ModelEntity> result;
                 if (entityDictionary.TryGetValue(model, out result))
                 {
-                    result.Add(entity);
+                    if (!result.Contains(entity))
+                    {
+                        result.Add(entity);
+                    }
                 }
             }
             else
