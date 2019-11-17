@@ -7,8 +7,19 @@ namespace GrzeEngine.Engine.Utils
 {
     public static class ResourceManager
     {
+        static Dictionary<string, VAO> oBJList = new Dictionary<string, VAO>();
+
         public static VAO LoadOBJModel(string obj, ShaderProgram shader)
         {
+            if (oBJList.ContainsKey(obj))
+            {
+                VAO result;
+                if (oBJList.TryGetValue(obj, out result))
+                {
+                    return result;
+                }
+            }
+
             string[] lines = Regex.Split(obj, "\r\n|\r|\n");
             List<Vector3> vertices = new List<Vector3>();
             List<uint> indices = new List<uint>();
@@ -35,6 +46,8 @@ namespace GrzeEngine.Engine.Utils
             vbos.Add(new GenericVBO<Vector3>(new VBO<Vector3>(vertices.ToArray()), "in_position"));
             vbos.Add(new GenericVBO<uint>(new VBO<uint>(indices.ToArray(), BufferTarget.ElementArrayBuffer, BufferUsageHint.StaticRead)));
             VAO model = new VAO(shader, vbos.ToArray());
+
+            oBJList.Add(obj, model);
             return model;
         }
 
