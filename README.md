@@ -1,7 +1,7 @@
 # GrzeEngine
 
 ## How To Setup A New Project
-Import the GrzeEngine library and than both `OpenGL.dll` & `OpenGL.Platform.dll` libraries into your project
+Import the `GrzeEngine`, `OpenGL.dll`, & `OpenGL.Platform.dll` libraries into your project
 
 Than, move `SDL2.dll`, found in `~/Lib`, into your output build directory. (Alternatively, place the dll into the root project folder and set it to `Copy if newer` in your IDE)
 
