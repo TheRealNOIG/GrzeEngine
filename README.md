@@ -1,11 +1,9 @@
 # GrzeEngine
 
 ## How To Setup A New Project
-Firstly, download all dependence using Nuget through Giawa's OpenGL Repo `Install-Package Giawa.OpenGL.Platform`
+Import the GrzeEngine library and than both `OpenGL.dll` & `OpenGL.Platform.dll` libraries into your project
 
-Than, replace the `OpenGL.dll` & `OpenGL.Platform.dll` with the DLL's in the `~/Lib` folder due to the Nuget ones being outdated. (Also due to fixes that have not been merged into Giawa Master branch)
-
-Finally, move `SDL2.dll`, found in `~/Lib`, into your output build directory. (Alternatively, place the dll into the root project folder and set it to `Copy if newer` in your IDE)
+Than, move `SDL2.dll`, found in `~/Lib`, into your output build directory. (Alternatively, place the dll into the root project folder and set it to `Copy if newer` in your IDE)
 
 ## Skeleton
 
