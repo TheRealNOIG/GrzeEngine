@@ -1,7 +1,5 @@
 ﻿using System;
 using GrzeEngine.Engine.Entities;
-using GrzeEngine.Engine.Entities._2D;
-using GrzeEngine.Engine.Entities._3D;
 using OpenGL;
 
 namespace GrzeEngine.Engine.Utils

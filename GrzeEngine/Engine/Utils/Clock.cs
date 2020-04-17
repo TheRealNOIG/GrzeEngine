@@ -28,7 +28,7 @@ namespace GrzeEngine.Engine.Utils
                 fps = framesRendered;                     
                 framesRendered = 0;            
                 lastSecounTime = DateTime.Now;
-                Log.Message(fps.ToString());
+                //Log.Message(fps.ToString());
             }
 
             return delta;

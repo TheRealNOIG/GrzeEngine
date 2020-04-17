@@ -1,4 +1,5 @@
-﻿using GrzeEngine.Engine.Utils;
+﻿using GrzeEngine.Engine.Logging;
+using GrzeEngine.Engine.Utils;
 using OpenGL;
 
 namespace GrzeEngine.Engine.Core
@@ -22,6 +23,9 @@ namespace GrzeEngine.Engine.Core
             Gl.BlendFunc(BlendingFactorSrc.SrcAlpha, BlendingFactorDest.OneMinusSrcAlpha);
 
             clock = new Clock();
+
+            //setup logging system
+            Log.CreateLoggers();
         }
 
         public virtual void StartLoop()

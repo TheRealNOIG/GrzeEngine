@@ -1,5 +1,4 @@
-﻿using GrzeEngine.Engine.Shaders;
-using GrzeEngine.Engine.Utils;
+﻿using GrzeEngine.Engine.Utils;
 using OpenGL;
 
 namespace GrzeEngine.Engine.Entities
