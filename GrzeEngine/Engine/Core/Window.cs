@@ -75,7 +75,7 @@ namespace GrzeEngine.Engine.Core
 
         private void HandleEvents()
         {
-            while (SDL.SDL_PollEvent(out sdlEvent) != 0 && OpenGL.Platform.Window.window != System.IntPtr.Zero)
+            while (SDL.SDL_PollEvent(out sdlEvent) != 0 && OpenGL.Platform.Window.windowID != System.IntPtr.Zero)
             {
                 switch (sdlEvent.type)
                 {
