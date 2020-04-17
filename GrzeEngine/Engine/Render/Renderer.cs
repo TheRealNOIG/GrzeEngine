@@ -36,7 +36,7 @@ namespace GrzeEngine.Engine.Render
                 foreach (Entity entity in item.Value)
                 {
                     shader.LoadTransformationMatrix(Maths.CreateTransformationMatrix(entity));
-                    Gl.DrawElements(model.DrawMode, model.VertexCount, model.elementType, model.offsetInBytes);
+                    Gl.DrawElements(model.DrawMode, model.VertexCount, model.ElementType, model.OffsetInBytes);
                 }
                 UnBindModel();
             }
