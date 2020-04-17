@@ -16,15 +16,6 @@ namespace GrzeEngine.Engine.Entities
         public override void Update(float delta)
         {
             float deltaSpeed = speed * delta;
-
-            if (KeyboardManager.IsKeyDown('w'))
-                IncreasePosition(0, -deltaSpeed);
-            if (KeyboardManager.IsKeyDown('s'))
-                IncreasePosition(0, deltaSpeed);
-            if (KeyboardManager.IsKeyDown('d'))
-                IncreasePosition(-deltaSpeed, 0);
-            if (KeyboardManager.IsKeyDown('a'))
-                IncreasePosition(deltaSpeed, 0);
         }
 
         public void IncreasePosition(float x, float y)
