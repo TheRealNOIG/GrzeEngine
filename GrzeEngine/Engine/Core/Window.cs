@@ -9,12 +9,14 @@ namespace GrzeEngine.Engine.Core
     public abstract class Window
     {
         protected int width, height;
+        protected float aspectRatio;
         protected Clock clock;
 
         public Window(int width, int height)
         {
             this.width = width;
             this.height = height;
+            this.aspectRatio = (float)width / (float)height;
         }
 
         public virtual void Initialize(int width, int height)

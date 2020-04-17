@@ -11,23 +11,28 @@ Than, move `SDL2.dll`, found in `~/Lib`, into your output build directory. (Alte
 class Window : GrzeEngine.Engine.Core.Window
 {
     private MasterRenderer masterRenderer;
+    public int[] viewWindow = { 250, 250 };
 
-    public Window(int width, int height) : base(width, height) {
-        Initialize(this.width, this.height);
+    public Window(int width, int height) : base(width, height)
+    {
+        Initialize(width, height);
         StartLoop();
         CleanUp();
     }
-    public override void Initialize(int width, int height) {
+    public override void Initialize(int width, int height)
+    {
         //Setup Window & OpenGL context
         base.Initialize(width, height);
 
         //Init Master renderer and pass in a new renderer
         masterRenderer = new MasterRenderer();
-        masterRenderer.AddRenderer("Renderer", new Renderer(this.width, this.height, new Camera2D(), new Static2DShader()));
+        //Setup renderer with a 2d camera and correct aspect ratio with the viewWindow
+        masterRenderer.AddRenderer("Renderer", new Renderer(viewWindow[0], (int)(viewWindow[1] / this.aspectRatio), new Camera2D(), new Static2DShader()));
         //Create Test Sprite
         masterRenderer.AddEntity("Renderer", new Sprite(Vector2.Zero, new Vector2(10, 10), Vector2.Zero, masterRenderer.GetShader("Renderer")));
     }
-    public override void OnRender() {
+    public override void OnRender()
+    {
         base.OnRender();
         //Proccess all entities before renderering
         masterRenderer.ProcessEntities();
@@ -36,16 +41,19 @@ class Window : GrzeEngine.Engine.Core.Window
         //Swap rendered buffer with current screen buffer
         SwapBuffers();
     }
-    public override void OnUpdate() {
+    public override void OnUpdate()
+    {
         float delta = clock.delta();
         //Update all Renderers and entities
         masterRenderer.Update(delta);
     }
-    public override void CleanUp() {
+    public override void CleanUp()
+    {
         //Inform all Renderers to cleanup
         masterRenderer.Cleanup();
     }
-    public override void OnExit() {
+    public override void OnExit()
+    {
         base.OnExit();
         Environment.Exit(0);
     }
