@@ -45,12 +45,6 @@ namespace GrzeEngine.Engine.Core
 
         public abstract void OnUpdate();
 
-        public virtual void HandleInput(char c, bool state)
-        {
-            Log.Message(((int)c).ToString() + " " + state.ToString());
-            KeyboardManager.HandleInput(c, state);
-        }
-
         public virtual void OnRender()
         {
             //SetupGL and Clear screen
@@ -75,15 +69,15 @@ namespace GrzeEngine.Engine.Core
 
         private void HandleEvents()
         {
-            while (SDL.SDL_PollEvent(out sdlEvent) != 0 && OpenGL.Platform.Window.windowID != System.IntPtr.Zero)
+            while (SDL.SDL_PollEvent(out sdlEvent) != 0 && OpenGL.Platform.Window.Open)
             {
                 switch (sdlEvent.type)
                 {
                     case SDL.SDL_EventType.SDL_KEYDOWN:
-                        KeyboardManager.HandleInput((char)sdlEvent.key.keysym.sym, true);
+                        KeyboardManager.HandleInput(sdlEvent.key.keysym.sym, true);
                         break;
                     case SDL.SDL_EventType.SDL_KEYUP:
-                        KeyboardManager.HandleInput((char)sdlEvent.key.keysym.sym, false);
+                        KeyboardManager.HandleInput(sdlEvent.key.keysym.sym, false);
                         break;
                     case SDL.SDL_EventType.SDL_MOUSEBUTTONDOWN:
                     case SDL.SDL_EventType.SDL_MOUSEBUTTONUP:
