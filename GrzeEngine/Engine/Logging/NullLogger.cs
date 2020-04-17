@@ -8,7 +8,7 @@ namespace GrzeEngine.Engine.Logging
         {
         }
 
-        protected override void WriteMessage(string msg)
+        protected override void WriteMessage<T>(T msg)
         {
             //NULLLOGGER useg for Singleton logger
         }

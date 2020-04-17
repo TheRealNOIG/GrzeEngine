@@ -11,13 +11,12 @@
                 return logger;
             }
         }
-
-        public static void Message(string message)
+        public static void Message<T>(T message)
         {
             Logger.Message(message, LogLevel.DEBUG);
         }
 
-        public static void Message(string message, LogLevel logLevel)
+        public static void Message<T>(T message, LogLevel logLevel)
         {
             Logger.Message(message, logLevel);
         }

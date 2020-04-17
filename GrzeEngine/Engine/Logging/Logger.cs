@@ -27,7 +27,7 @@ namespace GrzeEngine.Engine.Logging
             return this.nextLogger;
         }
 
-        public void Message(string msg, LogLevel level)
+        public void Message<T>(T msg, LogLevel level)
         {
             if ((level & this.levelMask) != 0)
             {
@@ -39,6 +39,6 @@ namespace GrzeEngine.Engine.Logging
             }
         }
 
-        abstract protected void WriteMessage(string msg);
+        abstract protected void WriteMessage<T>(T msg);
     }
 }

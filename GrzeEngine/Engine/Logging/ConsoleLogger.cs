@@ -8,9 +8,9 @@ namespace GrzeEngine.Engine.Logging
         {
         }
 
-        protected override void WriteMessage(string msg)
+        protected override void WriteMessage<T>(T msg)
         {
-            Console.WriteLine(msg);
+            Console.WriteLine(msg.ToString());
         }
     }
 }
