@@ -1,6 +1,8 @@
 ﻿using GrzeEngine.Engine.Logging;
 using GrzeEngine.Engine.Utils;
 using OpenGL;
+using SDL2;
+using System.Runtime.InteropServices;
 
 namespace GrzeEngine.Engine.Core
 {
@@ -22,6 +24,11 @@ namespace GrzeEngine.Engine.Core
             Gl.Enable(EnableCap.DepthTest);
             Gl.BlendFunc(BlendingFactorSrc.SrcAlpha, BlendingFactorDest.OneMinusSrcAlpha);
 
+            //Setup InputHandling
+            for (int i = 8; i < 223; i++)
+                OpenGL.Platform.Input.Subscribe((char)i, new OpenGL.Platform.Event(HandleInput));
+            OpenGL.Platform.Input.Subscribe((char)27, OnExit);
+
             clock = new Clock();
 
             //setup logging system
@@ -33,9 +40,6 @@ namespace GrzeEngine.Engine.Core
             while (OpenGL.Platform.Window.Open)
             {
                 OpenGL.Platform.Window.HandleEvents();
-                OpenGL.Platform.Input.Subscribe((char)27, OnExit);
-                //TODO Add non normal keys
-                OpenGL.Platform.Input.SubscribeAll(new OpenGL.Platform.Event(HandleInput));
 
                 OnUpdate();
                 OnRender();
@@ -48,7 +52,7 @@ namespace GrzeEngine.Engine.Core
 
         public virtual void HandleInput(char c, bool state)
         {
-            //Log.Message(((int)c).ToString() + " " + state.ToString());
+            Log.Message(((int)c).ToString() + " " + state.ToString());
             KeyboardManager.HandleInput(c, state);
         }
 
@@ -69,5 +73,7 @@ namespace GrzeEngine.Engine.Core
             CleanUp();
             OpenGL.Platform.Window.OnClose();
         }
+
+       
     }
 }
