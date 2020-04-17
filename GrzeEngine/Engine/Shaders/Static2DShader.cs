@@ -14,7 +14,7 @@ namespace GrzeEngine.Engine.Shaders
         public override void LoadProjectionMatrix(int width, int height)
         {
             //TODO get fov from active camera
-            this["projection_matrix"].SetValue(OpenGL.Matrix4.CreateOrthographic(256, 144, 0.1f, 1000.0f));
+            this["projection_matrix"].SetValue(OpenGL.Matrix4.CreateOrthographic(width, height, 0.1f, 1000.0f));
         }
     }
 }
