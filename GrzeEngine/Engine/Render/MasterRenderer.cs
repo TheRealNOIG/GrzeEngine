@@ -13,26 +13,25 @@ namespace GrzeEngine.Engine.Render
             renderers.Add(name, renderer);
         }
 
+        public Renderer GetRenderer(string rendererName)
+        {
+            if (renderers.ContainsKey(rendererName))
+                return renderers[rendererName];
+
+            return null;
+        }
+
         public void AddEntity(string renderer, ModelEntity entity)
         {
-            if (renderers.ContainsKey(renderer))
-            {
-                renderers[renderer].AddEntity(entity);
-            }
+            renderers[renderer]?.AddEntity(entity);
         }
         public void RemoveEntity(string renderer, ModelEntity entity)
         {
-            if (renderers.ContainsKey(renderer))
-            {
-                renderers[renderer].RemoveEntity(entity);
-            }
+            renderers[renderer]?.RemoveEntity(entity);
         }
         public void RemoveAllEntity(string renderer, ModelEntity entity)
         {
-            if (renderers.ContainsKey(renderer))
-            {
-                renderers[renderer].RemoveAllEntity(entity);
-            }
+            renderers[renderer]?.RemoveAllEntity(entity);
         }
 
         public void ProcessEntities()
@@ -44,10 +43,7 @@ namespace GrzeEngine.Engine.Render
         }
         public void ProcessEntities(string renderer)
         {
-            if (renderers.ContainsKey(renderer))
-            {
-                renderers[renderer].ProcessAllEntities();
-            }
+            renderers[renderer]?.ProcessAllEntities();
         }
 
         public void Render()
@@ -59,10 +55,7 @@ namespace GrzeEngine.Engine.Render
         }
         public void Render(string renderer)
         {
-            if (renderers.ContainsKey(renderer))
-            {
-                renderers[renderer].Render();
-            }
+            renderers[renderer]?.Render();
         }
 
         public void Update(float delta)
@@ -74,10 +67,7 @@ namespace GrzeEngine.Engine.Render
         }
         public void Update(string renderer, float delta)
         {
-            if (renderers.ContainsKey(renderer))
-            {
-                renderers[renderer].Update(delta);
-            }
+            renderers[renderer]?.Update(delta);
         }
 
         public void Cleanup()
@@ -89,17 +79,14 @@ namespace GrzeEngine.Engine.Render
         }
         public void Cleanup(string renderer)
         {
-            if (renderers.ContainsKey(renderer))
-            {
-                renderers[renderer].Cleanup();
-            }
+            renderers[renderer]?.Cleanup();
         }
 
         public StaticShader GetShader(string renderer)
         {
             if (renderers.ContainsKey(renderer))
             {
-                return renderers[renderer].GetShader();
+                return renderers[renderer]?.GetShader();
             }
             return null;
         }
