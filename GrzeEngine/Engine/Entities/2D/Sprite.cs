@@ -12,7 +12,7 @@ namespace GrzeEngine.Engine.Entities._2D
             this.position = new Vector3(position.X, position.Y, 0);
             this.size = new Vector3(size.X, size.Y, 0);
             this.rotation = new Vector3(rotation.X, rotation.Y, 0);
-            model = SpriteVAO.CreateQuad(shader, this.position, this.size);
+            model = SpriteVAO.CreateQuad(shader, this.size);
         }
 
         public override void Update(float delta)
