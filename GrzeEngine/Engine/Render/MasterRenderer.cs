@@ -20,6 +20,20 @@ namespace GrzeEngine.Engine.Render
                 renderers[renderer].AddEntity(entity);
             }
         }
+        public void RemoveEntity(string renderer, ModelEntity entity)
+        {
+            if (renderers.ContainsKey(renderer))
+            {
+                renderers[renderer].RemoveEntity(entity);
+            }
+        }
+        public void RemoveAllEntity(string renderer, ModelEntity entity)
+        {
+            if (renderers.ContainsKey(renderer))
+            {
+                renderers[renderer].RemoveAllEntity(entity);
+            }
+        }
 
         public void ProcessEntities()
         {

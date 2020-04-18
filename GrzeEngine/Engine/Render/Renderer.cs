@@ -1,5 +1,6 @@
 ﻿using GrzeEngine.Engine.Entities;
 using GrzeEngine.Engine.Entities._3D;
+using GrzeEngine.Engine.Logging;
 using GrzeEngine.Engine.Shaders;
 using GrzeEngine.Engine.Utils;
 using OpenGL;
@@ -40,6 +41,8 @@ namespace GrzeEngine.Engine.Render
                 }
                 UnBindModel();
             }
+
+            entityDictionary.Clear();
         }
         public virtual void Update(float delta)
         {
@@ -72,6 +75,14 @@ namespace GrzeEngine.Engine.Render
         public virtual void AddEntity(ModelEntity entity)
         {
             entityList.Add(entity);
+        }
+        public virtual void RemoveEntity(ModelEntity entity)
+        {
+            entityList.Remove(entity);
+        }
+        public virtual void RemoveAllEntity(ModelEntity entity)
+        {
+            entityList.RemoveAll(ent => ent.Equals(entity));
         }
 
         public void ProcessAllEntities()
