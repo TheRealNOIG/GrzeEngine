@@ -1,6 +1,8 @@
 ﻿using GrzeEngine.Engine.Entities._2D;
+using GrzeEngine.Engine.Logging;
 using GrzeEngine.Engine.Render;
 using OpenGL;
+using System;
 
 namespace GrzeEngine.Engine.Utils
 {
@@ -11,14 +13,18 @@ namespace GrzeEngine.Engine.Utils
         private Vector2 location;
         private T[,] cells;
 
-        public Grid(T cellType, int width, int height, float cellSize, Vector2 gridLocation)
+        public Grid(int width, int height, float cellSize, Vector2 gridLocation, Func<T> createCellObject)
         {
             this.width = width;
             this.height = height;
             this.cellSize = cellSize;
             this.location = gridLocation;
 
-            cells = new T[width, height];
+            this.cells = new T[width, height];
+
+            for (int w = 0; w < this.width; w++)
+                for (int h = 0; h < this.height; h++)
+                    this.cells[w, h] = createCellObject();
         }
 
         public T GetCellAtLocation(int x, int y)
